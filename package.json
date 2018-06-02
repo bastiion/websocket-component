@@ -1,10 +1,12 @@
 {
+  "description": "A websocket element wrapper",
+  "keywords": [
+    "web-components"
+  ],
+  "homepage": "https://github.com/wburgers/websocket-component",
   "name": "websocket-component",
   "version": "1.1.1",
-  "homepage": "https://github.com/wburgers/websocket-component",
-  "description": "A websocket element wrapper",
-  "keywords": ["web-components"],
-  "main": "websocket-component.html",
+  "main": "websocket-component.js",
   "authors": [
     "Willem Burgers"
   ],
@@ -15,10 +17,21 @@
     "bower_components"
   ],
   "dependencies": {
-    "Polymer": "^1.1.0"
+    "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "^1.0.0",
-		"web-component-tester": "*"
-  }
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "web-component-tester": "*",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
+    "wct-browser-legacy": "^0.0.1-pre.11",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  },
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0",
+    "@webcomponents/webcomponentsjs": "2.0.0-beta.2"
+  },
+  "author": "Willem Burgers"
 }

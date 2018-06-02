@@ -9,37 +9,54 @@ This code may only be used under the BSD style license found at http://wburgers.
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>websocket-component Demo</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
 
-  <link rel="import" href="../../polymer/polymer.html">
+  <script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../websocket-component.html">
-  <link rel="import" href="../shared-websocket-component.html">
+  <script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../websocket-component.js"></script>
+  <script type="module" src="../shared-websocket-component.js"></script>
 
-  <style is="custom-style" include="demo-pages-shared-styles">
-  </style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.setAttribute('style', 'display: none;');
+
+$_documentContainer.innerHTML = `<style is="custom-style" include="demo-pages-shared-styles">
+  </style>`;
+
+document.head.appendChild($_documentContainer.content);
+</script>
 </head>
 <body>
 
-<websocket-demo></websocket-demo>
+<script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<websocket-demo></websocket-demo>`;
+document.body.appendChild($_documentContainer.content);
+</script>
 
-<dom-module id="websocket-demo">
+<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="websocket-demo">
     <template>
     <div class="vertical-section-container centered">
         <h3>Standard websocket-component single request</h3>
         Check your console!
         <demo-snippet class="centered-demo">
-            <websocket-component
-                    id="websocket"
-                    url="wss://echo.websocket.org" auto handle-visibility
-                    on-websocket-open="_sendWebsocketMessage"
-                    on-websocket-message="_addWebsocketMessage">
+            <websocket-component id="websocket" url="wss://echo.websocket.org" auto="" handle-visibility="" on-websocket-open="_sendWebsocketMessage" on-websocket-message="_addWebsocketMessage">
             </websocket-component>
-            <pre>
-          <template is="dom-repeat" items="[[websocketMessages]]">
+            <pre>          <template is="dom-repeat" items="[[websocketMessages]]">
               [[item]]
           </template>
           </pre>
@@ -47,93 +64,78 @@ This code may only be used under the BSD style license found at http://wburgers.
         <h3>Shared websocket-component multi request</h3>
         Check your console!
         <demo-snippet class="centered-demo">
-            <shared-websocket-component
-                    id="websocket_110"
-                    socket-id="11"
-                    url="wss://echo.websocket.org" auto handle-visibility
-                    on-websocket-open="_sendSharedWebsocketMessage"
-                    on-websocket-message="_addSharedWebsocketMessage"
-                    on-websocket-ready="_addReadyMessage"
-            >
+            <shared-websocket-component id="websocket_110" socket-id="11" url="wss://echo.websocket.org" auto="" handle-visibility="" on-websocket-open="_sendSharedWebsocketMessage" on-websocket-message="_addSharedWebsocketMessage" on-websocket-ready="_addReadyMessage">
             </shared-websocket-component>
-            <shared-websocket-component
-                    id="websocket_111"
-                    socket-id="11"
-                    url="wss://echo.websocket.org" auto handle-visibility
-                    on-websocket-open="_sendSharedWebsocketMessage"
-                    on-websocket-message="_addSharedWebsocketMessage"
-                    on-websocket-ready="_addReadyMessage"
-            >
+            <shared-websocket-component id="websocket_111" socket-id="11" url="wss://echo.websocket.org" auto="" handle-visibility="" on-websocket-open="_sendSharedWebsocketMessage" on-websocket-message="_addSharedWebsocketMessage" on-websocket-ready="_addReadyMessage">
             </shared-websocket-component>
-            <shared-websocket-component
-                    id="websocket_120"
-                    socket-id="12"
-                    url="wss://echo.websocket.org" auto handle-visibility
-                    on-websocket-open="_sendSharedWebsocketMessage"
-                    on-websocket-message="_addSharedWebsocketMessage"
-                    on-websocket-ready="_addReadyMessage"
-            >
+            <shared-websocket-component id="websocket_120" socket-id="12" url="wss://echo.websocket.org" auto="" handle-visibility="" on-websocket-open="_sendSharedWebsocketMessage" on-websocket-message="_addSharedWebsocketMessage" on-websocket-ready="_addReadyMessage">
             </shared-websocket-component>
-            <pre>
-          <template is="dom-repeat" items="[[sharedWebsocketMessages]]">
+            <pre>          <template is="dom-repeat" items="[[sharedWebsocketMessages]]">
               [[item]]
           </template>
           </pre>
         </demo-snippet>
     </div>
     </template>
-</dom-module>
-<script>
-  const ws_element = document.getElementById('websocket');
-  addEventListener('WebComponentsReady', function() {
-    class WebsocketDemo extends Polymer.Element {
-      static get is() {
-        return "websocket-demo";
-      }
+</dom-module>`;
 
-      static get properties() {
-        return {
-          websocketMessages: {
-            type: Array,
-            notify: true,
-            value: () => []
-          },
-          sharedWebsocketMessages: {
-            type: Array,
-            notify: true,
-            value: () => []
-          }
-        }
-      }
+document.body.appendChild($_documentContainer.content);
+</script>
+<script type="module">
+import '@polymer/polymer/polymer-legacy.js';
+import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+import '@polymer/iron-demo-helpers/demo-snippet.js';
+import '../websocket-component.js';
+import '../shared-websocket-component.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+const ws_element = document.getElementById('websocket');
+class WebsocketDemo extends PolymerElement {
+  static get is() {
+    return "websocket-demo";
+  }
 
-      _addWebsocketMessage(event) {
-        console.log("Message received from echo websocket server:", event.detail.data);
-        this.push('websocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.detail.data);
-      }
-
-      _sendWebsocketMessage(event) {
-        this.$.websocket.send("test");
-      }
-
-      _addSharedWebsocketMessage(event) {
-        console.log("Message received from shared websocket " + event.target.id + " echo websocket server:", event.detail.data);
-        this.push('sharedWebsocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.target.id + "  received  " + event.detail.data);
-      }
-      _addReadyMessage(event) {
-        this.push('sharedWebsocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.target.id + "  is ready ");
-      }
-
-      _sendSharedWebsocketMessage(event) {
-        const wsElement = event.target;
-        wsElement.send("My name is " + wsElement.id);
-        window.setTimeout(() => {
-          wsElement.send("2nd shared message from " + wsElement.id)
-        }, 1000);
+  static get properties() {
+    return {
+      websocketMessages: {
+        type: Array,
+        notify: true,
+        value: () => []
+      },
+      sharedWebsocketMessages: {
+        type: Array,
+        notify: true,
+        value: () => []
       }
     }
+  }
 
-    window.customElements.define(WebsocketDemo.is, WebsocketDemo);
-  });
+  _addWebsocketMessage(event) {
+    console.log("Message received from echo websocket server:", event.detail.data);
+    this.push('websocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.detail.data);
+  }
+
+  _sendWebsocketMessage(event) {
+    this.$.websocket.send("test");
+  }
+
+  _addSharedWebsocketMessage(event) {
+    console.log("Message received from shared websocket " + event.target.id + " echo websocket server:", event.detail.data);
+    this.push('sharedWebsocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.target.id + "  received  " + event.detail.data);
+  }
+  _addReadyMessage(event) {
+    this.push('sharedWebsocketMessages', (new Date()).toLocaleTimeString() + ' -- ' + event.target.id + "  is ready ");
+  }
+
+  _sendSharedWebsocketMessage(event) {
+    const wsElement = event.target;
+    wsElement.send("My name is " + wsElement.id);
+    window.setTimeout(() => {
+      wsElement.send("2nd shared message from " + wsElement.id)
+    }, 1000);
+  }
+}
+
+window.customElements.define(WebsocketDemo.is, WebsocketDemo);
 </script>
 
 </body>
