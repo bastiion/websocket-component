@@ -215,16 +215,7 @@ export const WebsocketComponentBehavior = subclass =>class extends subclass {
   }
 };
 
-class WebsocketComponent extends WebsocketComponentBehavior(PolymerElement) {
-  static get template() {
-    return html`
-        <style>
-            :host {
-                display: none;
-            }
-        </style>
-`;
-  }
+export class WebsocketComponent extends WebsocketComponentBehavior(PolymerElement) {
 
   static get is() {
     return "websocket-component";

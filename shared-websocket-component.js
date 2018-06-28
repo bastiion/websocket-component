@@ -20,15 +20,6 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
  @demo demo/index.html
  */
 export class SharedWebsocketComponent extends WebsocketSharingBehavior( WebsocketComponentBehavior(PolymerElement) ) {
-  static get template() {
-    return html`
-        <style>
-            :host {
-                display: none;
-            }
-        </style>
-`;
-  }
 
   static get is() {
     return "shared-websocket-component";

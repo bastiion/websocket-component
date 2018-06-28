@@ -1,4 +1,3 @@
-import '@polymer/polymer/polymer-legacy.js';
 /** @polymerBehavior */
 export const WebsocketSharingBehavior = subclass => class extends subclass {
 
@@ -41,4 +40,4 @@ export const WebsocketSharingBehavior = subclass => class extends subclass {
     const socketId = _socketId | this.socketId;
     this._websockets.delete(socketId)
   }
-}
+};
