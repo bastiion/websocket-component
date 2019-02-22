@@ -3,9 +3,9 @@
   "keywords": [
     "web-components"
   ],
-  "homepage": "https://github.com/wburgers/websocket-component",
+  "homepage": "https://github.com/bastiion/websocket-component",
   "name": "websocket-component",
-  "version": "1.2.0",
+  "version": "3.1.0",
   "main": "websocket-component.js",
   "authors": [
     "Willem Burgers",
